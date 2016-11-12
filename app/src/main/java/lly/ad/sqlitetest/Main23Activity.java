@@ -7,12 +7,18 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.CursorAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,9 +50,22 @@ public class Main23Activity extends AppCompatActivity {
         }
 
         ListView ll =  (ListView) findViewById(R.id.listview2);
-        ll.setAdapter(new MyAdapter(lists));
+//        ll.setAdapter(new MyAdapter(lists));
 
+//        ll.setAdapter(new ArrayAdapter<>(this, R.layout.yy, R.id.name, lists.toArray()));
 
+//        ll.setAdapter(new SimpleAdapter(this, lists, R.layout.yy, new String[]{
+//                "name", "salary", "phone"
+//        }, new int[]{
+//                R.id.name, R.id.salary, R.id.phone
+//        }));
+        ll.setAdapter(new SimpleCursorAdapter(this, R.layout.yy,
+                cursor, new String[]{
+                "_id", "name", "salary", "phone"
+        }, new int[]{
+                R.id.id, R.id.name, R.id.salary, R.id.phone
+        }, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER));
+//        Arrays.asList()
     }
 
     private class MyAdapter extends BaseAdapter {
