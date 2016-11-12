@@ -15,6 +15,7 @@ public class SqLiteTest extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        db.execSQL("create table second (_id integer primary key autoincrement, name char(10), salary char(20), phone integer(10)) ");
         System.out.println("创建数据库");
     }
 
@@ -22,5 +23,10 @@ public class SqLiteTest extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         System.out.println("更新数据库");
 
+    }
+
+    @Override
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        super.onDowngrade(db, oldVersion, newVersion);
     }
 }
